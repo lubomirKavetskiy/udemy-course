@@ -2447,3 +2447,4 @@ If you have ideas for more “How To” recipes that should be on this page, [le
 1)*if you don't have global setup => npm install create-react-app -g
 1) create-react-app name-of-project
 2) npm start
+3) git checkout -b gh-pages
