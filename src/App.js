@@ -30,8 +30,15 @@ class App extends Component {
         {name: `Lubomir_2050`, age: 32},
         {name: event.target.value, age: 28},
         {name: `Oleg`, age: 64},
-      ]
+      ],
+      otherState: `tatatata`,
+      showPersons: false,
     })
+  }
+
+  togglePersonHandler = ()=> {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
   }
 
   render() {
@@ -47,27 +54,33 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'am React App</h1>
         <p>This is really working</p>
-        <button style = {style} onClick = {() => this.switchNameHandler(`Lubomir_2030`)}>Switch name</button>
-        <Person 
-          name = {this.state.persons[0].name}
-          age = {this.state.persons[0].age}
-          click = {this.switchNameHandler.bind(this, `Lubomir_2020`)} 
-          changed = {this.nameChangeHendler}
-        />
-        <Person 
-          name = {this.state.persons[1].name}
-          age = {this.state.persons[1].age}>
-          I love drawing
-        </Person>
-        <Person 
-          name = {this.state.persons[1].name} 
-          age = {this.state.persons[1].age}>
-          <Drawing todo = "drawing"/>
-        </Person>
-        <Person 
-          name = {this.state.persons[2].name}
-          age = {this.state.persons[2].age}
-        />
+        {/* <button style = {style} onClick = {() => this.switchNameHandler(`Lubomir_2030`)}>Switch name</button> */}
+        <button onClick = {this.togglePersonHandler}>Switch name</button>
+        {
+          this.state.showPersons ?
+          <div>
+            <Person 
+              name = {this.state.persons[0].name}
+              age = {this.state.persons[0].age}
+              click = {this.switchNameHandler.bind(this, `Lubomir_2020`)} 
+              changed = {this.nameChangeHendler}
+            />
+            <Person 
+              name = {this.state.persons[1].name}
+              age = {this.state.persons[1].age}>
+              I love drawing
+            </Person>
+            <Person 
+              name = {this.state.persons[1].name} 
+              age = {this.state.persons[1].age}>
+              <Drawing todo = "drawing"/>
+            </Person>
+            <Person 
+              name = {this.state.persons[2].name}
+              age = {this.state.persons[2].age}
+            />
+          </div> : null
+        }
       </div>
     );
   }
