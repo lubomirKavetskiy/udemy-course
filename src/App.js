@@ -9,7 +9,9 @@ class App extends Component {
       {name: `Lubomir`, age: 32},
       {name: `Yulia`, age: 28},
       {name: `Oleg`, age: 42},
-    ]
+    ],
+    otherState: `tatatata`,
+    showPersons: false,
   }
 
   switchNameHandler = (newName) => {
@@ -30,13 +32,11 @@ class App extends Component {
         {name: `Lubomir_2050`, age: 32},
         {name: event.target.value, age: 28},
         {name: `Oleg`, age: 64},
-      ],
-      otherState: `tatatata`,
-      showPersons: false,
+      ]
     })
   }
 
-  togglePersonHandler = ()=> {
+  togglePersonHandler = () => {
     const doesShow = this.state.showPersons;
     this.setState({showPersons: !doesShow});
   }
@@ -50,37 +50,42 @@ class App extends Component {
       padding: `10px`,
     };
 
+    let persons = null;
+    console.log(1, this.state.showPersons);
+    if( this.state.showPersons ) {
+      persons = (
+        <div>
+          <Person 
+            name = {this.state.persons[0].name}
+            age = {this.state.persons[0].age}
+            click = {this.switchNameHandler.bind(this, `Lubomir_2020`)} 
+            changed = {this.nameChangeHendler}
+          />
+          <Person 
+            name = {this.state.persons[1].name}
+            age = {this.state.persons[1].age}>
+            I love drawing
+          </Person>
+          <Person 
+            name = {this.state.persons[1].name} 
+            age = {this.state.persons[1].age}>
+            <Drawing todo = "drawing"/>
+          </Person>
+          <Person 
+            name = {this.state.persons[2].name}
+            age = {this.state.persons[2].age}
+          />
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>Hi, I'am React App</h1>
         <p>This is really working</p>
         {/* <button style = {style} onClick = {() => this.switchNameHandler(`Lubomir_2030`)}>Switch name</button> */}
         <button onClick = {this.togglePersonHandler}>Switch name</button>
-        {
-          this.state.showPersons ?
-          <div>
-            <Person 
-              name = {this.state.persons[0].name}
-              age = {this.state.persons[0].age}
-              click = {this.switchNameHandler.bind(this, `Lubomir_2020`)} 
-              changed = {this.nameChangeHendler}
-            />
-            <Person 
-              name = {this.state.persons[1].name}
-              age = {this.state.persons[1].age}>
-              I love drawing
-            </Person>
-            <Person 
-              name = {this.state.persons[1].name} 
-              age = {this.state.persons[1].age}>
-              <Drawing todo = "drawing"/>
-            </Person>
-            <Person 
-              name = {this.state.persons[2].name}
-              age = {this.state.persons[2].age}
-            />
-          </div> : null
-        }
+        {persons}
       </div>
     );
   }
