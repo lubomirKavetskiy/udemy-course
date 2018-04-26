@@ -29,7 +29,7 @@ class App extends Component {
   nameChangeHendler = (event) => {
     this.setState({
       persons: [
-        {name: `Lubomir_2050`, age: 32},
+        {name: `Lubomir_2060`, age: 32},
         {name: event.target.value, age: 28},
         {name: `Oleg`, age: 64},
       ]
@@ -55,7 +55,7 @@ class App extends Component {
     if( this.state.showPersons ) {
       persons = (
         <div>
-          <Person 
+          {/* <Person 
             name = {this.state.persons[0].name}
             age = {this.state.persons[0].age}
             click = {this.switchNameHandler.bind(this, `Lubomir_2020`)} 
@@ -69,12 +69,19 @@ class App extends Component {
           <Person 
             name = {this.state.persons[1].name} 
             age = {this.state.persons[1].age}>
-            <Drawing todo = "drawing"/>
+            <Drawing todo = "smiling"/>
           </Person>
           <Person 
             name = {this.state.persons[2].name}
             age = {this.state.persons[2].age}
-          />
+          /> */}
+
+          {this.state.persons.map(person => {
+            return <Person 
+              name={person.name}
+              age={person.age}
+            />
+          })}
         </div>
       );
     }
